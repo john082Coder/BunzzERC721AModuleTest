@@ -1,23 +1,15 @@
 ## Preparation before deployment
-1. Prepare your any ERC20 token which will be used for vesting token in your wallet.
+1. Developer your own NFT contract which will use ERC721A.
 
 ## Get started(Operation)
-As Project Owner,
-
-1. Deploy smart contract via Bunzz
-2. Set vesting token address by calling `connectToOtherContracts` function.
-3. Deposit some amount of vesting tokens to the contract.
-4. To create new vesting schedule, call the function `createVestingSchedule()`.
-5. To revoke current vesting schedule of the contract,  call the function `revokeVestingSchedule()`.
-6. To release vesting tokens to beneficiary address, call the function `release()`.
 
 
-## How-to
+1. Deploy your own NFT contract.
+2. Set NFT name and symbole when deploying smart contract by passing params.
+3. You can set  AUX data by calling `_setAux()`.
+4. You can mint multiple nfts in one transaction by calling `_mint()` or `_safeMint()` function.
 
-- How to get the current releasable amount?
-  Call `releasableAmount()`. 
-- How to get vested amount?
-  Call `vestedAmount(uint64 timestamp)`.
+
 
 
 
