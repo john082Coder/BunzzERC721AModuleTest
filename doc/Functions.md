@@ -38,11 +38,12 @@ Gives an certain address permision to move tokens for the token owner
 |tokenId|uint256|Token id that will be approved to be user by other account|
 
 ## _setAux
-Gas spent here starts off proportional to the maximum mint batch size.
+Sets the auxillary data for `owner`. (e.g. number of whitelist mint slots used).
 
 |Name|Type|Description|
 |--- |---|---|
-|tokenId|uint256|Token ID|
+|owner|address|Owner address|
+|aux|uint64|Auxillary data slots|
 
 ## setApprovalForAll
 
@@ -60,23 +61,23 @@ Safely mints `quantity` tokens and transfers them to `to`.
 |--- |---|---|
 |to|address|Mint to address|
 |quantity|uint256|Mint quantity|
-|_date|bytes memory|Safe mint data|
-
+|_data|bytes memory|Safe mint data|
 
 ## _mint
+Mints `quantity` tokens and transfers them to `to`.
+
+|Name|Type|Description|
+|--- |---|---|
+|to|address|Mint to address|
+|quantity|uint256|Mint quantity|
+
+## _transfer
 Transfers `tokenId` from `from` to `to`.
 
 |Name|Type|Description|
 |--- |---|---|
 |from|address|Transfer from address|
 |to|address|Transfer to address|
-|tokenId|uint256|Token ID|
-
-## _transfer
-Equivalent to `_burn(tokenId, false)`.
-
-|Name|Type|Description|
-|--- |---|---|
 |tokenId|uint256|Token ID|
 
 ## _burn
@@ -88,6 +89,15 @@ Destorys `tokenId`.
 |approvalCheck|bool|True for approved|
 
 ## _approve
+Approve `to` to operate on `tokenId`
+
+|Name|Type|Description|
+|--- |---|---|
+|to|address|Approve to address|
+|tokenId|uint256|Token ID|
+|owner|address|Owner address|
+
+## _checkContractOnERC721Received
 Internal function to invoke {IERC721Receiver-onERC721Received} on a target contract.
 
 |Name|Type|Description|
@@ -97,7 +107,7 @@ Internal function to invoke {IERC721Receiver-onERC721Received} on a target contr
 |tokenId|uint256|ID of the token to be transferred|
 |_data|bytes memory|Optional data to send along with the call|
 
-## _checkContractOnERC721Received
+## _beforeTokenTransfers
 Hook that is called before a set of serially-ordered token ids are about to be transferred. This includes minting.
 
 |Name|Type|Description|
@@ -107,23 +117,10 @@ Hook that is called before a set of serially-ordered token ids are about to be t
 |startTokenId|uint256|Start Token ID|
 |quantity|uint256|Transfer quantity|
 
-## _beforeTokenTransfers
-Hook that is called after a set of serially-ordered token ids have been transferred. This includes
-
-|Name|Type|Description|
-|--- |---|---|
-|from|address|Transfer from address|
-|to|address|Transfer to address|
-|startTokenId|uint256|Start Token ID|
-|quantity|uint256|Transfer quantity|
-
-## _afterTokenTransfers
-
-
 # READ(main)
 
 ## _startTokenId
-Burned tokens are calculated here, use _totalMinted() if you want to count just minted tokens.
+To change the starting tokenId, please override this function.
 
 No arguments
 
@@ -133,7 +130,7 @@ Returns the amount of tokens in existence
 No arguments
 
 ## _totalMinted
-See {IERC165-supportsInterface}.
+Returns the total amount of tokens minted in the contract.
 
 No arguments
 
@@ -152,32 +149,33 @@ Returns the token amount owned by an address
 |owner|address|The account which you want to check the balance|
 
 ## _numberMinted
-Returns the number of tokens burned by or on behalf of `owner`.
+Returns the number of tokens minted by `owner`.
 
 |Name|Type|Description|
 |--- |---|---|
 |owner|address|Owner address|
 
 ## _numberBurned
-Returns the auxillary data for `owner`. (e.g. number of whitelist mint slots used).
+Returns the number of tokens burned by or on behalf of `owner`.
 
 |Name|Type|Description|
 |--- |---|---|
 |owner|address|Owner address|
 
 ## _getAux
-Sets the auxillary data for `owner`. (e.g. number of whitelist mint slots used).
+Returns the auxillary data for `owner`. (e.g. number of whitelist mint slots used).
 
 |Name|Type|Description|
 |--- |---|---|
 |owner|address|Owner address|
-|aux|uint64|Auxillary data slots|
 
 
 ## _ownershipOf
-See {IERC721-ownerOf}.
+Gas spent here starts off proportional to the maximum mint batch size.
 
-No arguments
+|Name|Type|Description|
+|--- |---|---|
+|tokenId|uint256|Token ID|
 
 ## ownerOf
 Retrieves the owner of a token id
@@ -204,7 +202,7 @@ Returns the uri of the metadata
 |tokenId|uint256|The id of the token|
 
 ## _baseURI
-See {IERC721-approve}.
+Base URI for computing {tokenURI}. If set, the resulting URI for each
 
 No arguments
 
@@ -224,9 +222,8 @@ Tells whether an operator is approved by a given owner.
 |operator|uint256|The account that will get the rights to operate over owner balance|
 
 ## _exists
-Equivalent to `_safeMint(to, quantity, '')`.
+Returns whether `tokenId` exists.
 
 |Name|Type|Description|
 |--- |---|---|
-|to|address|Mint to address|
-|quantity|uint256|Mint quantity|
+|tokenId|uint256|Token ID|
