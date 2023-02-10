@@ -20,5 +20,28 @@ Safely transfers the ownership of a given token ID
 |tokenId|uint256|The id of the token that will be sent||N/A|
 |_data|bytes|Optional data field||N/A|
 
+## approve
 
+## _setAux
+
+## setApprovalForAll
+
+## _safeMint
+
+## _mint
+
+## _transfer
+
+## _burn
+
+## _approve
+
+## _checkContractOnERC721Received
+
+## _beforeTokenTransfers
+
+## _afterTokenTransfers
+
+
+# READ(main)
 
