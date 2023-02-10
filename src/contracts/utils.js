@@ -218,3 +218,12 @@ export const mint = async (erc721AContract, amount,  account) => {
     return tx.transactionHash
   }); 
 }
+
+export const setBaseURI = async (erc721AContract, baseURI,  account) => {
+  return erc721AContract.methods.setBaseURI(baseURI).send({ from: account})
+  .on('transactionHash', (tx) => {
+    console.log(tx)
+    return tx.transactionHash
+  }); 
+}
+

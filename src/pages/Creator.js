@@ -3,7 +3,7 @@ import React, { useState,  } from "react";
 
 import useBunzz from '../hooks/useBunzz';
 
-import { getErc721AContract, mint  } from '../contracts/utils'
+import { getErc721AContract, mint, setBaseURI  } from '../contracts/utils'
 import { useWeb3React } from "@web3-react/core";
 
 import { bnToDec, isAddress } from "../utils";
@@ -13,9 +13,11 @@ const Creator = () => {
     const erc721AContract = getErc721AContract(bunzz);
 
     const [mintAmount, setMintAmount] = useState(0);
+    const [baseURIString, setBaseURIString] = useState("");
   
 
     const [pendingMint, setPendingMint] = useState(false);
+    const [pendingSetBaseURI, setPendingSetBaseURI] = useState(false);
   
   
    
@@ -67,8 +69,45 @@ const Creator = () => {
                                     />{` `} Mint
                             </Button>
                         }
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Input BaseURI</Form.Label>
+                            <Form.Control type="email" placeholder="Enter URI" value={baseURIString} onChange={(val) => setBaseURIString(val.target.value)} />
+                        </Form.Group>
 
-                       
+                        {!pendingSetBaseURI ?
+                                <Button className="mx-3 mt-2" variant="dark" onClick={async () => {
+                                    setPendingSetBaseURI(true);
+                                try {
+                                    let txHash;
+                                    
+                                    txHash = await setBaseURI(
+                                        erc721AContract,
+                                        baseURIString,
+                                        account,
+                                    );
+                                
+                                    console.log(txHash);
+                                    setPendingSetBaseURI(false);
+                                    
+                                } catch (e) {
+                                    console.log(e);
+                                    setPendingSetBaseURI(false);
+                                    
+                                }
+                            }}>
+                                SetBaseURI
+                            </Button>
+                            :
+                            <Button className="mx-3 mt-2" variant="dark">
+                                 <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                    />{` `} SetBaseURI
+                            </Button>
+                        }
                        
                         
                      
