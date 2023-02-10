@@ -21,6 +21,12 @@ Safely transfers the ownership of a given token ID
 |_data|bytes|Optional data field||N/A|
 
 ## approve
+Gives an certain address permision to move tokens for the token owner
+
+|Name|Type|Description|
+|--- |---|---|
+|to|address|Account to approve to spend caller balance|
+|tokenId|uint256|Token id that will be approved to be user by other account|
 
 ## _setAux
 
