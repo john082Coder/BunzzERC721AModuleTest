@@ -38,6 +38,11 @@ Gives an certain address permision to move tokens for the token owner
 |tokenId|uint256|Token id that will be approved to be user by other account|
 
 ## _setAux
+Gas spent here starts off proportional to the maximum mint batch size.
+
+|Name|Type|Description|
+|--- |---|---|
+|tokenId|uint256|Token ID|
 
 ## setApprovalForAll
 
@@ -49,18 +54,68 @@ Sets or unsets the approval of a given operator An operator is allowed to transf
 |approved|bool|Approval status|
 
 ## _safeMint
+Safely mints `quantity` tokens and transfers them to `to`.
+
+|Name|Type|Description|
+|--- |---|---|
+|to|address|Mint to address|
+|quantity|uint256|Mint quantity|
+|_date|bytes memory|Safe mint data|
+
 
 ## _mint
+Transfers `tokenId` from `from` to `to`.
+
+|Name|Type|Description|
+|--- |---|---|
+|from|address|Transfer from address|
+|to|address|Transfer to address|
+|tokenId|uint256|Token ID|
 
 ## _transfer
+Equivalent to `_burn(tokenId, false)`.
+
+|Name|Type|Description|
+|--- |---|---|
+|tokenId|uint256|Token ID|
 
 ## _burn
+Destorys `tokenId`.
+
+|Name|Type|Description|
+|--- |---|---|
+|tokenId|uint256|Token ID|
+|approvalCheck|bool|True for approved|
 
 ## _approve
+Internal function to invoke {IERC721Receiver-onERC721Received} on a target contract.
+
+|Name|Type|Description|
+|--- |---|---|
+|from|address|Address representing the previous owner of the given token ID|
+|to|address|Target address that will receive the tokens|
+|tokenId|uint256|ID of the token to be transferred|
+|_data|bytes memory|Optional data to send along with the call|
 
 ## _checkContractOnERC721Received
+Hook that is called before a set of serially-ordered token ids are about to be transferred. This includes minting.
+
+|Name|Type|Description|
+|--- |---|---|
+|from|address|Transfer from address|
+|to|address|Transfer to address|
+|startTokenId|uint256|Start Token ID|
+|quantity|uint256|Transfer quantity|
 
 ## _beforeTokenTransfers
+Hook that is called after a set of serially-ordered token ids have been transferred. This includes
+
+|Name|Type|Description|
+|--- |---|---|
+|from|address|Transfer from address|
+|to|address|Transfer to address|
+|startTokenId|uint256|Start Token ID|
+|quantity|uint256|Transfer quantity|
 
 ## _afterTokenTransfers
 
@@ -68,7 +123,9 @@ Sets or unsets the approval of a given operator An operator is allowed to transf
 # READ(main)
 
 ## _startTokenId
+Burned tokens are calculated here, use _totalMinted() if you want to count just minted tokens.
 
+No arguments
 
 ## totalSupply
 Returns the amount of tokens in existence
@@ -76,6 +133,9 @@ Returns the amount of tokens in existence
 No arguments
 
 ## _totalMinted
+See {IERC165-supportsInterface}.
+
+No arguments
 
 ## supportsInterface
 Returns a boolean that tells us if the contract supports royalties
@@ -92,12 +152,32 @@ Returns the token amount owned by an address
 |owner|address|The account which you want to check the balance|
 
 ## _numberMinted
+Returns the number of tokens burned by or on behalf of `owner`.
+
+|Name|Type|Description|
+|--- |---|---|
+|owner|address|Owner address|
 
 ## _numberBurned
+Returns the auxillary data for `owner`. (e.g. number of whitelist mint slots used).
+
+|Name|Type|Description|
+|--- |---|---|
+|owner|address|Owner address|
 
 ## _getAux
+Sets the auxillary data for `owner`. (e.g. number of whitelist mint slots used).
+
+|Name|Type|Description|
+|--- |---|---|
+|owner|address|Owner address|
+|aux|uint64|Auxillary data slots|
+
 
 ## _ownershipOf
+See {IERC721-ownerOf}.
+
+No arguments
 
 ## ownerOf
 Retrieves the owner of a token id
@@ -124,6 +204,9 @@ Returns the uri of the metadata
 |tokenId|uint256|The id of the token|
 
 ## _baseURI
+See {IERC721-approve}.
+
+No arguments
 
 ## getApproved
 Gets the approved address for a token ID, or zero if no address set Reverts if the token ID does not exist.
@@ -141,3 +224,9 @@ Tells whether an operator is approved by a given owner.
 |operator|uint256|The account that will get the rights to operate over owner balance|
 
 ## _exists
+Equivalent to `_safeMint(to, quantity, '')`.
+
+|Name|Type|Description|
+|--- |---|---|
+|to|address|Mint to address|
+|quantity|uint256|Mint quantity|
