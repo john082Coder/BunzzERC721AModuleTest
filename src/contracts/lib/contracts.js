@@ -29,6 +29,7 @@ export class Contracts {
     this.paymentSplitter = new this.web3.eth.Contract(PaymentSplitterAbi);
     this.vestingWallet = new this.web3.eth.Contract(VestingWalletAbi);
     this.erc721A = new this.web3.eth.Contract(Erc721AAbi);
+  
 
 
 

@@ -1,5 +1,5 @@
 ## Preparation before deployment
-1. Developer your own NFT contract which will use ERC721A.
+1. Develop your own NFT contract which will use ERC721A.
 
 ## Get started(Operation)
 
