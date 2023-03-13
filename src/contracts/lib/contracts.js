@@ -6,10 +6,8 @@ import {
 
 } from './constants.js';
 
-import EscrowAbi from './abi/escrowContract.json';
 import Erc20Abi from './abi/erc20.json';
-import PaymentSplitterAbi from './abi/paymentSplitter.json'
-import VestingWalletAbi from './abi/vestingWallet.json'
+
 import Erc721AAbi from './abi/erc721A.json' 
 
 export class Contracts {
@@ -23,11 +21,10 @@ export class Contracts {
     this.defaultGasPrice = options.defaultGasPrice;
     console.log("this web3 = ", this.web3);
    
-    this.escrow = new this.web3.eth.Contract(EscrowAbi);
+  
     this.erc20 = new this.web3.eth.Contract(Erc20Abi);
 
-    this.paymentSplitter = new this.web3.eth.Contract(PaymentSplitterAbi);
-    this.vestingWallet = new this.web3.eth.Contract(VestingWalletAbi);
+
     this.erc721A = new this.web3.eth.Contract(Erc721AAbi);
   
 
@@ -44,10 +41,7 @@ export class Contracts {
       else console.error('Contract address not found in network', networkId);
     }
 
-  
-    setProvider(this.escrow, contractAddresses.escrow[networkId]);
-    setProvider(this.paymentSplitter, contractAddresses.paymentSplitter[networkId]);
-    setProvider(this.vestingWallet, contractAddresses.vestingWallet[networkId]);
+ 
     setProvider(this.erc721A, contractAddresses.erc721A[networkId]);
    
 
