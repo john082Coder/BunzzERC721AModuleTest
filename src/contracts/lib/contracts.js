@@ -6,6 +6,7 @@ import {
 
 } from './constants.js';
 
+
 import Erc20Abi from './abi/erc20.json';
 
 import Erc721AAbi from './abi/erc721A.json' 
@@ -24,9 +25,8 @@ export class Contracts {
   
     this.erc20 = new this.web3.eth.Contract(Erc20Abi);
 
-
-    this.erc721A = new this.web3.eth.Contract(Erc721AAbi);
   
+    this.erc721A = new this.web3.eth.Contract(Erc721AAbi);
 
 
 
@@ -41,7 +41,8 @@ export class Contracts {
       else console.error('Contract address not found in network', networkId);
     }
 
- 
+  
+   
     setProvider(this.erc721A, contractAddresses.erc721A[networkId]);
    
 
