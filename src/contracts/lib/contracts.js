@@ -50,6 +50,6 @@ export class Contracts {
   }
 
   setDefaultAccount(account) {
-    this.escrow.options.from = account;
+   
   }
 }
