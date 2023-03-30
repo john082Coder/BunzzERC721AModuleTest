@@ -38,7 +38,7 @@ export const setErc20ContractAddress = (bunzz, address) => {
 
 
 export const mint = async (erc721AContract, amount,  account) => {
-  return erc721AContract.methods.Mint(amount).send({ from: account})
+  return erc721AContract.methods.mint(account, amount).send({ from: account})
   .on('transactionHash', (tx) => {
     console.log(tx)
     return tx.transactionHash
